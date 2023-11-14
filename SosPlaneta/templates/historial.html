@@ -43,8 +43,8 @@
             padding: 20px;
             width: 100%;
             text-align: center;
-            margin-bottom: 460px;
-            
+            margin-top: -450px;
+                        
             align-items: center; /* Centra verticalmente el contenido de la navbar */
         }
 
@@ -52,7 +52,7 @@
             color: black;
             padding: 0px 10px;
             font-size: 18px;
-            margin-top: 6px;
+            margin-top: -6px;
             text-decoration: none;
             display: inline-block;
         }
@@ -68,7 +68,7 @@
             margin-right: 40px; /* Margen hacia la derecha*/
             margin-bottom: -20px; /* Margen hacia abajo */
         }
-
+        
     </style>
 </head>
 <body>
@@ -79,16 +79,9 @@
         <a href="/" id="home-link">Home</a> <a href="/mapa">Mapa</a> <a href="/historial">Historial</a> <a href="/nosotros">Nosotros</a>
         <!-- Puedes agregar más enlaces según sea necesario -->
     </nav>
-    
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Historial de Calidad del Aire</title>
-</head>
-<body>
-    <h1>Historial de Calidad del Aire</h1>
+    <div class="contenido">
+        <h1> Historial de Calidad del Aire</h1>
+    </div>
     <ul>
         {% for dato in datos %}
         <li>{{ dato }}</li>
