@@ -1,0 +1,5 @@
+# Sensor SSD-009, Conchalí, Chile (Purple Air/124003)
+# https://aqicn.org/station/@249280/
+# Daily pm25
+date,min,max,median,q1,q3,stdev,count
+2022-02-24T00:00:00.000Z,2,6.6,4.7,3.35,5.25,1.205,28
