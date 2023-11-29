@@ -1,5 +1,0 @@
-# Sensor Centro Empresarial El Cortijo, Conchalí, Chile (uRad Monitor/1400002d)
-# https://aqicn.org/station/@108835/
-# Daily pm25
-date,min,max,median,q1,q3,stdev,count
-2020-01-15T00:00:00.000Z,8,8,8,8,8,0,11

@@ -1,8 +1,0 @@
-# Sensor Avenida Maquehue, Padre Las Casas, Chile (Citizen Science project sensor.community/18889)
-# https://aqicn.org/station/@82375/
-# Daily pm25
-date,min,max,median,q1,q3,stdev,count
-2019-12-12T00:00:00.000Z,2.04,4.63,3.9,2.2,4.22,0.968,15
-2019-12-13T00:00:00.000Z,1.65,2.4,1.97,1.84,2.2,0.232,30
-2019-12-14T00:00:00.000Z,1.7,2.2,1.98,1.78,2.15,0.198,4
-2019-12-17T00:00:00.000Z,1.48,2.47,1.98,1.48,2.47,0.495,2
