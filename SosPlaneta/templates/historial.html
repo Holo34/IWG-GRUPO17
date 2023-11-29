@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url("https://cdn.discordapp.com/attachments/1156438955810631761/1171920919078391818/pichula.png?ex=655e6f68&is=654bfa68&hm=a40ee342559006d0acadeb1fc4c65fe071157e0ad77ab3748f4bceb72454e14c&");
+            background-size: cover;
+            background-repeat: repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Centra horizontalmente el contenido */
+            height: 100vh;
+            margin: 0;
+        }
+    
+        #titulo {
+            color: rgb(255, 255, 255);
+            text-align: center; /* Centra el texto horizontalmente */
+            margin-left: 10px;
+        }
+    
+        #info {
+            color: white;
+            text-align: center;
+            max-width: 600px;
+        }
+    
+        h2 {
+            color: rgb(255, 255, 255);
+            font-family: 'Open Sauce One', sans-serif;
+        }
+    
+        .EQUIPO {
+            text-align: center;
+        }
+
+        /* Agrega estilos a tu navbar */
+        nav {
+            /* Estilos para la navbar, puedes personalizar según tu diseño */
+            background-color: #ffffff;
+            color: black;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            margin-top: -450px;
+                        
+            align-items: center; /* Centra verticalmente el contenido de la navbar */
+        }
+
+        nav a {
+            color: black;
+            padding: 0px 10px;
+            font-size: 18px;
+            margin-top: -6px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        nav a#home-link {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+            color: green; /* Cambia el color del texto Home a verde*/
+            border-radius: 10px; /* Añade borde */
+        }
+
+        nav img {
+            height: 50px; /* Altura de la imagen SosPlaneta */
+            margin-right: 40px; /* Margen hacia la derecha*/
+            margin-bottom: -20px; /* Margen hacia abajo */
+        }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <!-- Contenido de tu navbar aquí -->
+        <img src="https://imgur.com/riAqCRz.jpg" alt="Logo"> <!-- Imagen de la barrita blanca, SosPlaneta  -->
+        <span style="font-size: 20px; margin-right: 10px;"><strong>SOSPlaneta</strong></span> <!-- Agrega el nombre "SOSPlaneta" -->
+        <a href="/" id="home-link">Home</a> <a href="/mapa">Mapa</a> <a href="/historial">Historial</a> <a href="/nosotros">Nosotros</a>
+        <!-- Puedes agregar más enlaces según sea necesario -->
+    </nav>
+    <div class="contenido">
+        <h1> Historial de Calidad del Aire</h1>
+    </div>
+    <ul>
+        {% for dato in datos %}
+        <li>{{ dato }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
