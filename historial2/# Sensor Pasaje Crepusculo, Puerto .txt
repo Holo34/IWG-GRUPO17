@@ -1,0 +1,8 @@
+# Sensor Pasaje Crepusculo, Puerto Varas, Chile (Citizen Science project sensor.community/33914)
+# https://aqicn.org/station/@196831/
+# Daily pm25
+date,min,max,median,q1,q3,stdev,count
+2021-03-17T00:00:00.000Z,8.6,9.48,9.1,8.75,9.36,0.3,5
+2021-03-19T00:00:00.000Z,8.93,22.52,17.07,9.27,18.89,5.037,9
+2021-03-21T00:00:00.000Z,4.07,5.03,4.67,4.36,4.86,0.344,4
+2021-03-22T00:00:00.000Z,5.8,10.3,7.63,6.85,9.27,1.406,15

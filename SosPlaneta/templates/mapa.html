@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa</title>
+    <style> /* todo esto es un copypaste para todas las secciones de la navbar, estas nos permiten darle un estilo propio*/
+        body {
+            background-image: url("https://neopraxis.mx/wp-content/uploads/2023/10/La-Psicologia-del-Cambio-Climatico-Despertando-Conciencias-1024x576.png");
+            background-size: cover;
+            background-repeat: repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Centra horizontalmente el contenido */
+            height: 100vh;
+            margin: 0;
+        }
+    
+        #titulo {
+            color: rgb(255, 255, 255);
+            text-align: center; /* Centra el texto horizontalmente */
+            margin-left: 10px;
+        }
+    
+        #info {
+            color: white;
+            text-align: center;
+            max-width: 600px;
+        }
+    
+        h2 {
+            color: rgb(255, 255, 255);
+            font-family: 'Open Sauce One', sans-serif;
+        }
+    
+        .EQUIPO {
+            text-align: center;
+        }
+
+        /* estilo navbar*/
+        nav {
+            background-color: #ffffff;
+            color: black; 
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            margin-top: -70px;
+                        
+            align-items: center; /* Centra verticalmente el contenido de la navbar */
+        }
+
+        nav a {
+            color: black;  /*color texto navbar*/
+            padding: 0px 10px;
+            font-size: 18px; /*tamaño letra*/
+            margin-top: -6px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        nav a#mapa-link {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; /* se extraen ciertas tipografías para la palabra Home*/
+            color: green; /* Cambia el color del texto Home a verde*/
+            border-radius: 10px; /* Añade borde */
+        }
+
+        nav img {
+            height: 50px; /* Altura de la imagen SosPlaneta */
+            margin-right: 40px; /* Margen hacia la derecha*/
+            margin-bottom: -20px; /* Margen hacia abajo */
+        }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <!-- Contenido de tu navbar aquí -->
+        <img src="https://imgur.com/riAqCRz.jpg" alt="Logo"> <!-- Imagen de la barrita blanca, SosPlaneta  -->
+        <span style="font-size: 20px; margin-right: 10px;"><strong>SOSPlaneta</strong></span> <!-- Agrega el nombre "SOSPlaneta" -->
+        <a href="/" id="home-link">Home</a> <a href="/mapa" id="mapa-link">Mapa</a> <a href="/historial">Historial</a> <a href="/nosotros">Nosotros</a>
+        <!-- Puedes agregar más enlaces según sea necesario -->
+    </nav>
+    <div class="contenido">
+        <h1 id="titulo">Calidad del Aire</h1>
+        <style> #titulo{color:rgb(255, 255, 255)}; </style>
+        <button>Ozono</button>
+        <button>PM 2.5</button>
+        <button>PM 10</button>
+        <div class="Mapa">
+          <div  id='map'  style='height:500px; width:800px ;border-radius: 10px;' >  
+<link  rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"  />  
+<script  src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>  
+
+<script>  
+
+if (!navigator.geolocation) {
+    throw new Error('No se encontro la localizacion')
+}
+
+function succes(pos) {
+
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
+    var  OSM_URL  =  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';  
+      var  OSM_ATTRIB  =  '&copy;  <a  href="http://openstreetmap.org/copyright">OpenStreetMap</a>  contributors';  
+      var  osmLayer  =  L.tileLayer(OSM_URL,  {attribution:  OSM_ATTRIB});  
+  
+      var  WAQI_URL    =  "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=701ddd2366550d5f2fa875a38da1c12a464d8178";  
+      var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
+      var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});  
+  
+      var  map  =  L.map('map').setView([lat,  lng],  12);  
+      var marker = L.marker([lat, lng]).addTo(map);
+      map.addLayer(osmLayer).addLayer(waqiLayer);
+    console.log(pos);
+}
+function error() {
+
+}
+
+const options = {}
+navigator.geolocation.watchPosition(succes, error, options)
+
+
+</script>
+        </div>
+    </div>
+</body>

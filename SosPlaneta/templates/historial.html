@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Historial</title>
+    <style> /* todo esto es un copypaste para todas las secciones de la navbar, estas nos permiten darle un estilo propio*/
+        body {
+            background-image: url("https://neopraxis.mx/wp-content/uploads/2023/10/La-Psicologia-del-Cambio-Climatico-Despertando-Conciencias-1024x576.png"); /*imagen de fondo de pantalla*/
+            background-size: cover;
+            background-repeat: repeat; /*permite que si el tamaño del fondo no alcanza, este se repita*/
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Centra horizontalmente el contenido */
+            height: 100vh;
+            margin: 0;
+        }
+    
+        #titulo {
+            color: rgb(255, 255, 255);
+            text-align: center; /* Centra el texto horizontalmente */
+            margin-left: 10px;
+        }
+    
+        #info {
+            color: white;
+            text-align: center;
+            max-width: 600px;
+        }
+    
+        h2 {
+            color: rgb(255, 255, 255);
+            font-family: 'Open Sauce One', sans-serif;
+        }
+    
+        .EQUIPO {
+            text-align: center;
+        }
+
+        /* Agrega estilos a tu navbar */
+        nav {
+            /* Estilos para la navbar, puedes personalizar según tu diseño */
+            background-color: #ffffff;
+            color: black;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            margin-top: -538px;
+                        
+            align-items: center; /* Centra verticalmente el contenido de la navbar */
+        }
+
+        nav a { /* configuracion texto de navegación */
+            color: black;
+            padding: 0px 10px;
+            font-size: 18px;
+            margin-top: -6px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        nav a#historial-link { /*configuración texto home */
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+            color: green; /* Cambia el color del texto Home a verde*/
+            border-radius: 10px; /* Añade borde */
+        }
+
+        nav img {
+            height: 50px; /* Altura de la imagen SosPlaneta */
+            margin-right: 40px; /* Margen hacia la derecha*/
+            margin-bottom: -20px; /* Margen hacia abajo */
+        }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <!-- Contenido de tu navbar aquí -->
+        <img src="https://imgur.com/riAqCRz.jpg" alt="Logo"> <!-- Imagen de la barrita blanca, SosPlaneta  -->
+        <span style="font-size: 20px; margin-right: 10px;"><strong>SOSPlaneta</strong></span> <!-- Agrega el nombre "SOSPlaneta" -->
+        <a href="/" id="home-link">Home</a> <a href="/mapa">Mapa</a> <a href="/" id="historial-link">Historial</a> <a href="/nosotros">Nosotros</a>
+        <!-- Puedes agregar más enlaces según sea necesario -->
+    </nav>
+    <div class="contenido">
+        <h1> Historial de Calidad del Aire</h1> <!-- textos para la sección Historial-->
+    </div>
+    <ul>
+        {% for dato in datos %}
+        <li>{{ dato }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

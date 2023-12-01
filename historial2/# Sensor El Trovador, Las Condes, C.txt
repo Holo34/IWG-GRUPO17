@@ -1,0 +1,5 @@
+# Sensor El Trovador, Las Condes, Chile (Citizen Science project sensor.community/44195)
+# https://aqicn.org/station/@112129/
+# Daily pm25
+date,min,max,median,q1,q3,stdev,count
+2020-03-29T00:00:00.000Z,43.5,57,45.25,44,51.5,5.414,4
