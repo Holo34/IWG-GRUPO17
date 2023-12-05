@@ -108,8 +108,11 @@ function succes(pos) {
       var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
       var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});  
   
-      var  map  =  L.map('map').setView([lat,  lng],  12);  
-      var marker = L.marker([lat, lng]).addTo(map);
+      var  map  =  L.map('map').setView([lat,  lng],  11);  
+      var marker = L.marker([lat, lng], {
+        title: "Aqui estas tu!"
+      }).addTo(map)
+      .bindPopup("<h1>Informacion de calidad</h1> <img src='https://i.imgur.com/jC6g7UV.png' style: width= 300px/>")
       map.addLayer(osmLayer).addLayer(waqiLayer);
     console.log(pos);
 }
@@ -119,9 +122,7 @@ function error() {
 
 const options = {}
 navigator.geolocation.watchPosition(succes, error, options)
-
-
 </script>
-        </div>
-    </div>
+
+
 </body>
