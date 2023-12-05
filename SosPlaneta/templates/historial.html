@@ -1,92 +1,227 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-    <title>Historial</title>
-    <style> /* todo esto es un copypaste para todas las secciones de la navbar, estas nos permiten darle un estilo propio*/
-        body {
-            background-image: url("https://neopraxis.mx/wp-content/uploads/2023/10/La-Psicologia-del-Cambio-Climatico-Despertando-Conciencias-1024x576.png"); /*imagen de fondo de pantalla*/
-            background-size: cover;
-            background-repeat: repeat; /*permite que si el tamaño del fondo no alcanza, este se repita*/
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; /* Centra horizontalmente el contenido */
-            height: 100vh;
-            margin: 0;
-        }
-    
-        #titulo {
-            color: rgb(255, 255, 255);
-            text-align: center; /* Centra el texto horizontalmente */
-            margin-left: 10px;
-        }
-    
-        #info {
-            color: white;
-            text-align: center;
-            max-width: 600px;
-        }
-    
-        h2 {
-            color: rgb(255, 255, 255);
-            font-family: 'Open Sauce One', sans-serif;
-        }
-    
-        .EQUIPO {
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial de Calidad del Aire</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("https://neopraxis.mx/wp-content/uploads/2023/10/La-Psicologia-del-Cambio-Climatico-Despertando-Conciencias-1024x576.png");
+      background-size: cover;
+      background-repeat: repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-        /* Agrega estilos a tu navbar */
-        nav {
-            /* Estilos para la navbar, puedes personalizar según tu diseño */
-            background-color: #ffffff;
-            color: black;
-            padding: 20px;
-            width: 100%;
-            text-align: center;
-            margin-top: -538px;
-                        
-            align-items: center; /* Centra verticalmente el contenido de la navbar */
-        }
+    #wrapper {
+      height: 100vh;
+      overflow: hidden; /* Evitar desplazamiento vertical */
+    }
 
-        nav a { /* configuracion texto de navegación */
-            color: black;
-            padding: 0px 10px;
-            font-size: 18px;
-            margin-top: -6px;
-            text-decoration: none;
-            display: inline-block;
-        }
+    #titulo {
+      color: rgb(255, 255, 255);
+      text-align: center;
+      margin-left: 10px;
+    }
 
-        nav a#historial-link { /*configuración texto home */
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
-            color: green; /* Cambia el color del texto Home a verde*/
-            border-radius: 10px; /* Añade borde */
-        }
+    #info {
+      color: white;
+      text-align: center;
+      max-width: 600px;
+    }
 
-        nav img {
-            height: 50px; /* Altura de la imagen SosPlaneta */
-            margin-right: 40px; /* Margen hacia la derecha*/
-            margin-bottom: -20px; /* Margen hacia abajo */
-        }
-        
-    </style>
+    h2 {
+      color: rgb(255, 255, 255);
+      font-family: 'Open Sauce One', sans-serif;
+    }
+
+    .EQUIPO {
+      text-align: center;
+    }
+
+    nav {
+      background-color: #ffffff;
+      color: black;
+      padding: 20px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      margin-top: 0;
+      /* Ajustado para evitar el desplazamiento hacia arriba */
+    }
+
+    nav a {
+      color: black;
+      padding: 0px 10px;
+      font-size: 18px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    nav a#historial-link {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      color: green;
+      border-radius: 10px;
+    }
+
+    nav img {
+      height: 50px;
+      margin-right: 40px;
+      margin-bottom: -20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: white;
+      z-index: 1;
+    }
+
+    th,
+    td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .table-container {
+      overflow-y: auto;
+      max-height: 300px; /* Ajusta según sea necesario */
+      margin-top: 20px;
+    }
+
+    .download-links {
+      margin-top: 10px;
+    }
+
+    .download-link {
+      margin-right: 10px;
+    }
+
+    .contenido {
+      z-index: 1;
+    }
+  </style>
 </head>
+
 <body>
+  <div id="wrapper">
     <nav>
-        <!-- Contenido de tu navbar aquí -->
-        <img src="https://imgur.com/riAqCRz.jpg" alt="Logo"> <!-- Imagen de la barrita blanca, SosPlaneta  -->
-        <span style="font-size: 20px; margin-right: 10px;"><strong>SOSPlaneta</strong></span> <!-- Agrega el nombre "SOSPlaneta" -->
-        <a href="/" id="home-link">Home</a> <a href="/mapa">Mapa</a> <a href="/" id="historial-link">Historial</a> <a href="/nosotros">Nosotros</a>
-        <!-- Puedes agregar más enlaces según sea necesario -->
+      <img src="https://imgur.com/riAqCRz.jpg" alt="Logo">
+      <span style="font-size: 20px; margin-right: 10px;"><strong>SOSPlaneta</strong></span>
+      <a href="/" id="home-link">Home</a>
+      <a href="/mapa">Mapa</a>
+      <a href="/" id="historial-link">Historial</a>
+      <a href="/nosotros">Nosotros</a>
     </nav>
+
     <div class="contenido">
-        <h1> Historial de Calidad del Aire</h1> <!-- textos para la sección Historial-->
+      <h1> Historial de Calidad del Aire</h1>
     </div>
-    <ul>
-        {% for dato in datos %}
-        <li>{{ dato }}</li>
-        {% endfor %}
-    </ul>
+
+    <label for="fileInput">Seleccionar archivo CSV:</label>
+    <input type="file" id="fileInput" accept=".csv">
+    <div id="csvContent" class="table-container"></div>
+    <div class="download-links">
+      <a href="#" class="download-link" id="downloadLinkviña-del-mar-air-quality">Descargar historial Viña del Mar CSV</a>
+      <a href="#" class="download-link" id="downloadLinkcoquimbo,-chile-air-quality">Descargar historial Coquimbo CSV</a>
+      <a href="#" class="download-link" id="downloadLinkla-florida 2-air-quality">Descargar historial La Florida CSV</a>
+      <a href="#" class="download-link" id="downloadLinkla-serena-air-quality">Descargar historial La Serena CSV</a>
+      <a href="#" class="download-link" id="downloadLinkrancagua-i-air-quality">Descargar historial Rancagua CSV</a>
+      <a href="#" class="download-link" id="downloadLinksan-carlos-air-quality">Descargar historial San Carlos CSV</a>
+      <a href="#" class="download-link" id="downloadLinkvaldivia-air-quality">Descargar historial Valdivia CSV</a>
+      <a href="#" class="download-link" id="downloadLinkrengo-air-quality">Descargar historial Rengo CSV</a>
+      <a href="#" class="download-link" id="downloadLink# Sensor SSD-005, Quilicura, Chile ">Descargar historial Quilicura CSV</a>
+      <a href="#" class="download-link" id="downloadLink# Sensor Silva.D6.Ex, Ñuñoa, Chile ">Descargar historial Ñuñoa CSV</a>
+      <a href="#" class="download-link" id="downloadLink# Sensor Teresa.ex.SR17, San Joaquí">Descargar historial San Joaquín CSV</a>
+      <a href="#" class="download-link" id="downloadLinkpudahuel-air-quality">Descargar historial Pudahuel CSV</a>
+    </div>
+  </div>
+
+  <script>
+    let originalContents = {}; // Almacena el contenido original del archivo CSV para cada enlace
+
+    document.getElementById('fileInput').addEventListener('change', handleFile);
+
+    function handleFile(event) {
+      const file = event.target.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const content = e.target.result;
+          originalContents['downloadLinkviña-del-mar-air-quality'] = content;
+          originalContents['downloadLinkcoquimbo,-chile-air-quality'] = content;
+          originalContents['downloadLinkla-florida 2-air-quality'] = content;
+          originalContents['downloadLinkla-serena-air-quality'] = content;
+          originalContents['downloadLinkrancagua-i-air-quality'] = content;
+          originalContents['downloadLinksan-carlos-air-quality'] = content;
+          originalContents['downloadLinkvaldivia-air-quality'] = content;
+          originalContents['downloadLinkrengo-air-quality'] = content;
+          originalContents['downloadLink# Sensor SSD-005, Quilicura, Chile '] = content;
+          originalContents['downloadLink# Sensor Silva.D6.Ex, Ñuñoa, Chile '] = content;
+          originalContents['downloadLink# Sensor Teresa.ex.SR17, San Joaquí'] = content;
+          originalContents['downloadLinkpudahuel-air-quality'] = content;
+
+          displayCSV(content);
+          updateDownloadLinks();
+        };
+
+        reader.readAsText(file);
+      }
+    }
+
+    function displayCSV(content) {
+      const lines = content.split('\n');
+      const table = document.createElement('table');
+
+      lines.forEach((line, index) => {
+        const row = table.insertRow();
+        const cells = line.split(',');
+
+        cells.forEach(cell => {
+          const cellElement = index === 0 ? document.createElement('th') : row.insertCell();
+          cellElement.textContent = cell;
+          index === 0 ? row.appendChild(cellElement) : '';
+        });
+      });
+
+      const tableContainer = document.getElementById('csvContent');
+      tableContainer.innerHTML = '';
+      tableContainer.appendChild(table);
+    }
+
+    function updateDownloadLinks() {
+      // Actualiza los enlaces de descarga con los objetos Blob respectivos
+      for (const linkId in originalContents) {
+        if (originalContents.hasOwnProperty(linkId)) {
+          const content = originalContents[linkId];
+          const blob = new Blob([content], { type: 'text/csv' });
+
+          document.getElementById(linkId).href = window.URL.createObjectURL(blob);
+          document.getElementById(linkId).download = linkId + '.csv';
+        }
+      }
+    }
+  </script>
 </body>
+
 </html>

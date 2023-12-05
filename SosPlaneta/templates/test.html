@@ -1,58 +1,133 @@
-import pandas as pd
-import tkinter as tk
-from tkinter import ttk
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mostrar y Descargar archivos CSV</title>
 
-class TablaDinamicaApp:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Tabla Dinámica")
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
 
-        # Crear un diccionario para almacenar los DataFrames de cada comuna
-        self.comunas_dataframes = {}
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
 
-        # Cargar los archivos CSV y almacenar en el diccionario
-        comunas = ['rengo', 'santiago', 'punta_arenas']  # Lista de comunas (puedes agregar más)
-        for comuna in comunas:
-            csv_path = f"{comuna}.csv"
-            df = pd.read_csv(csv_path)
-            self.comunas_dataframes[comuna] = df
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
 
-        # Crear una tabla usando Treeview de ttk
-        self.tree = ttk.Treeview(root)
-        self.tree["columns"] = tuple(self.comunas_dataframes[comunas[0]].columns)
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
 
-        for col in self.comunas_dataframes[comunas[0]].columns:
-            self.tree.heading(col, text=col)
-            self.tree.column(col, anchor=tk.CENTER)
+    th {
+      background-color: #f2f2f2;
+    }
 
-        for i, row in self.comunas_dataframes[comunas[0]].iterrows():
-            self.tree.insert("", i, values=tuple(row))
+    .download-links {
+      margin-top: 10px;
+    }
 
-        self.tree.pack(pady=10)
+    .download-link {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
 
-        # Crear un Menú desplegable para seleccionar una comuna
-        self.comunas = ttk.Combobox(root, values=comunas)
-        self.comunas.set(comunas[0])
-        self.comunas.pack(pady=10)
+  <label for="fileInput">Seleccionar archivo CSV:</label>
+  <input type="file" id="fileInput" accept=".csv">
+  <div id="csvContent"></div>
+  <div class="download-links">
+    <a href="#" class="download-link" id="downloadLinkviña-del-mar-air-quality">Descargar historial Viña del Mar CSV</a>
+    <a href="#" class="download-link" id="downloadLinkcoquimbo,-chile-air-quality">Descargar historial Coquimbo CSV</a>
+    <a href="#" class="download-link" id="downloadLinkla-florida 2-air-quality">Descargar historial La Florida CSV</a>
+    <a href="#" class="download-link" id="downloadLinkla-serena-air-quality">Descargar historial La Serena CSV</a>
+    <a href="#" class="download-link" id="downloadLinkrancagua-i-air-quality">Descargar historial Rancagua CSV</a>
+    <a href="#" class="download-link" id="downloadLinksan-carlos-air-quality">Descargar historial San Carlos CSV</a>
+    <a href="#" class="download-link" id="downloadLinkvaldivia-air-quality">Descargar historial Valdivia CSV</a>
+    <a href="#" class="download-link" id="downloadLinkrengo-air-quality">Descargar historial Rengo CSV</a>
+    <a href="#" class="download-link" id="downloadLink# Sensor SSD-005, Quilicura, Chile ">Descargar historial Quilicura CSV</a>
+    <a href="#" class="download-link" id="downloadLink# Sensor Silva.D6.Ex, Ñuñoa, Chile ">Descargar historial Ñuñoa CSV</a>
+    <a href="#" class="download-link" id="downloadLink# Sensor Teresa.ex.SR17, San Joaquí">Descargar historial San Joaquín CSV</a>
+    <a href="#" class="download-link" id="downloadLinkpudahuel-air-quality">Descargar historial Pudahuel CSV</a>
+    <!-- Agrega más enlaces de descarga según la cantidad de archivos CSV que tengas -->
+  </div>
 
-        # Botón para mostrar la información de calidad del aire de la comuna seleccionada
-        btn_mostrar = tk.Button(root, text="Mostrar Información", command=self.mostrar_informacion)
-        btn_mostrar.pack(pady=10)
+  <script>
+    let originalContents = {}; // Almacena el contenido original del archivo CSV para cada enlace
 
-    def mostrar_informacion(self):
-        # Obtener la comuna seleccionada
-        comuna_seleccionada = self.comunas.get()
+    document.getElementById('fileInput').addEventListener('change', handleFile);
 
-        # Obtener el DataFrame correspondiente a la comuna seleccionada
-        df_comuna = self.comunas_dataframes[comuna_seleccionada]
+    function handleFile(event) {
+      const file = event.target.files[0];
 
-        # Mostrar la información en la tabla
-        self.tree.delete(*self.tree.get_children())  # Limpiar la tabla
+      if (file) {
+        const reader = new FileReader();
 
-        for i, row in df_comuna.iterrows():
-            self.tree.insert("", i, values=tuple(row))
+        reader.onload = function (e) {
+          const content = e.target.result;
+          originalContents['downloadLinkviña-del-mar-air-quality'] = content;
+          originalContents['downloadLinkcoquimbo,-chile-air-quality'] = content;
+          originalContents['downloadLinkla-florida 2-air-quality'] = content;
+          originalContents['downloadLinkla-serena-air-quality'] = content;
+          originalContents['downloadLinkrancagua-i-air-quality'] = content;
+          originalContents['downloadLinksan-carlos-air-quality'] = content;
+          originalContents['downloadLinkvaldivia-air-quality'] = content;
+          originalContents['downloadLinkrengo-air-quality'] = content;
+          originalContents['downloadLink# Sensor SSD-005, Quilicura, Chile '] = content;
+          originalContents['downloadLink# Sensor Silva.D6.Ex, Ñuñoa, Chile '] = content;
+          originalContents['downloadLink# Sensor Teresa.ex.SR17, San Joaquí'] = content;
+          originalContents['downloadLinkpudahuel-air-quality'] = content;
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = TablaDinamicaApp(root)
-    root.mainloop()
+          displayCSV(content);
+          updateDownloadLinks();
+        };
+
+        reader.readAsText(file);
+      }
+    }
+
+    function displayCSV(content) {
+      const lines = content.split('\n');
+      const table = document.createElement('table');
+
+      lines.forEach((line, index) => {
+        const row = table.insertRow();
+        const cells = line.split(',');
+
+        cells.forEach(cell => {
+          const cellElement = index === 0 ? document.createElement('th') : row.insertCell();
+          cellElement.textContent = cell;
+          index === 0 ? row.appendChild(cellElement) : '';
+        });
+      });
+
+      document.getElementById('csvContent').innerHTML = '';
+      document.getElementById('csvContent').appendChild(table);
+    }
+
+    function updateDownloadLinks() {
+      // Actualiza los enlaces de descarga con los objetos Blob respectivos
+      for (const linkId in originalContents) {
+        if (originalContents.hasOwnProperty(linkId)) {
+          const content = originalContents[linkId];
+          const blob = new Blob([content], { type: 'text/csv' });
+
+          document.getElementById(linkId).href = window.URL.createObjectURL(blob);
+          document.getElementById(linkId).download = linkId + '.csv';
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
