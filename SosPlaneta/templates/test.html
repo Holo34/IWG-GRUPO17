@@ -1,123 +1,58 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style> /* todo esto es un copypaste para todas las secciones de la navbar, estas nos permiten darle un estilo propio*/
-        body {
-    background-image: url("https://neopraxis.mx/wp-content/uploads/2023/10/La-Psicologia-del-Cambio-Climatico-Despertando-Conciencias-1024x576.png");
-    background-size: cover;
-    background-repeat: repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; /* Centra horizontalmente el contenido */
-    height: 100vh;
-    margin: 0;
-}
+import pandas as pd
+import tkinter as tk
+from tkinter import ttk
 
-#titulo {
-    color: rgb(255, 255, 255);
-    text-align: center; /* Centra el texto horizontalmente */
-    margin-left: 10px;
-}
+class TablaDinamicaApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Tabla Dinámica")
 
-#info {
-    color: white;
-    text-align: center;
-    max-width: 600px;
-}
+        # Crear un diccionario para almacenar los DataFrames de cada comuna
+        self.comunas_dataframes = {}
 
-h2 {
-    color: rgb(255, 255, 255);
-    font-family: 'Open Sauce One', sans-serif;
-}
+        # Cargar los archivos CSV y almacenar en el diccionario
+        comunas = ['rengo', 'santiago', 'punta_arenas']  # Lista de comunas (puedes agregar más)
+        for comuna in comunas:
+            csv_path = f"{comuna}.csv"
+            df = pd.read_csv(csv_path)
+            self.comunas_dataframes[comuna] = df
 
-.EQUIPO {
-    text-align: center;
-}
+        # Crear una tabla usando Treeview de ttk
+        self.tree = ttk.Treeview(root)
+        self.tree["columns"] = tuple(self.comunas_dataframes[comunas[0]].columns)
 
-/* Agrega estilos a tu navbar */
-nav {
-    /* Estilos para la navbar, puedes personalizar según tu diseño */
-    background-color: #ffffff;
-    color: black;
-    padding: 20px;
-    width: 100%;
-    text-align: center; 
-    margin-top: 10px;
-    align-items: center; /* Centra verticalmente el contenido de la navbar */
-}
+        for col in self.comunas_dataframes[comunas[0]].columns:
+            self.tree.heading(col, text=col)
+            self.tree.column(col, anchor=tk.CENTER)
 
-nav a {
-    color: black;
-    padding: 0px 10px;
-    font-size: 18px;
-    margin-top: 6px;
-    text-decoration: none;
-    display: inline-block;
-}
+        for i, row in self.comunas_dataframes[comunas[0]].iterrows():
+            self.tree.insert("", i, values=tuple(row))
 
-nav a#nosotros-link {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
-    color: green; /* Cambia el color del texto Home a verde*/
-    border-radius: 10px; /* Añade borde */
-}
+        self.tree.pack(pady=10)
 
-nav img {
-    height: 50px; /* Altura de la imagen SosPlaneta */
-    margin-right: 40px; /* Margen hacia la derecha*/
-    margin-bottom: -20px; /* Margen hacia abajo */
-}
+        # Crear un Menú desplegable para seleccionar una comuna
+        self.comunas = ttk.Combobox(root, values=comunas)
+        self.comunas.set(comunas[0])
+        self.comunas.pack(pady=10)
 
-    </style>
-</head>
-<body>
-    <nav>
-        <!-- Contenido de tu navbar aquí -->
-        <img src="https://imgur.com/riAqCRz.jpg" alt="Logo"> <!-- Imagen de la barrita blanca, SosPlaneta  -->
-        <span style="font-size: 20px; margin-right: 10px;"><strong>SOSPlaneta</strong></span> <!-- Agrega el nombre "SOSPlaneta" -->
-        <a href="/" id="home-link">Home</a> <a href="/mapa">Mapa</a> <a href="/historial">Historial</a> <a href="/nosotros" id="nosotros-link">Nosotros</a> <a href="/test" id="test-link">test</a>
-        <!-- Puedes agregar más enlaces según sea necesario -->
-    </nav>
-    <div class="contenido">
-        <h1 id="titulo">Calidad del Aire</h1>
-        <style> #titulo{color:rgb(255, 255, 255)}; </style>
-        <div class="Mapa">
-            <div  id='map'  style='height:500px;width: 800px;'>  
-<link  rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"  />  
-<script  src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>  
+        # Botón para mostrar la información de calidad del aire de la comuna seleccionada
+        btn_mostrar = tk.Button(root, text="Mostrar Información", command=self.mostrar_informacion)
+        btn_mostrar.pack(pady=10)
 
-<script>  
+    def mostrar_informacion(self):
+        # Obtener la comuna seleccionada
+        comuna_seleccionada = self.comunas.get()
 
-if (!navigator.geolocation) {
-    throw new Error('no hay loca q exista')
-}
+        # Obtener el DataFrame correspondiente a la comuna seleccionada
+        df_comuna = self.comunas_dataframes[comuna_seleccionada]
 
-function succes(pos) {
+        # Mostrar la información en la tabla
+        self.tree.delete(*self.tree.get_children())  # Limpiar la tabla
 
-    const lat = pos.coords.latitude;
-    const lng = pos.coords.longitude;
-    var  OSM_URL  =  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';  
-        var  OSM_ATTRIB  =  '&copy;  <a  href="http://openstreetmap.org/copyright">OpenStreetMap</a>  contributors';  
-        var  osmLayer  =  L.tileLayer(OSM_URL,  {attribution:  OSM_ATTRIB});  
-    
-        var  WAQI_URL    =  "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=701ddd2366550d5f2fa875a38da1c12a464d8178";  
-        var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
-        var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});  
-    
-        var  map  =  L.map('map').setView([lat,  lng],  12);  
-        var marker = L.marker([lat, lng]).addTo(map);
-        map.addLayer(osmLayer).addLayer(waqiLayer);
-    console.log(pos);
-}
-function error() {
+        for i, row in df_comuna.iterrows():
+            self.tree.insert("", i, values=tuple(row))
 
-}
-
-const options = {}
-navigator.geolocation.watchPosition(succes, error, options)
-
-</script>
-        </div>
-    </div>
-</body>
-</html>
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = TablaDinamicaApp(root)
+    root.mainloop()
